@@ -1,0 +1,22 @@
+<div class="card login">
+    <div class="card-header">
+        <h5>Login</h5>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="form">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" formControlName="email" />
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" formControlName="password" />
+            </div>
+        </form>
+    </div>
+    <div class="card-footer text-center">
+        <button type="submit" (click)="onSubmit()" [disabled]="!this.form.valid" class="btn btn-light w-50 bg-light text-dark">
+            <i class="fa-solid fa-share-from-square"></i> Log in
+        </button>
+    </div>
+</div>

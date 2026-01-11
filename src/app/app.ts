@@ -1,12 +1,33 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet, RouterLinkActive, Router } from '@angular/router';
+import { UserService } from '../services/user.service';
+import { Utils } from './utils';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('icr-toy-shop');
+  protected year = new Date().getFullYear()
+  
+  constructor(private router: Router, private utils: Utils) {}
+
+  getUserName() {
+    const user = UserService.getActiveUser()
+    return `${user.fullName}`
+  }
+  
+  hasAuth(){
+    return UserService.hasAuth()
+  }
+
+  doLogout() {
+    return this.utils.showDialog("Are you sure u want to logout?", () => {
+      UserService.logout()
+      this.router.navigateByUrl('/login')
+    })
+  }
+  
 }
