@@ -1,3 +1,4 @@
+import { OrderModel } from "../models/order.model"
 import { UserModel } from "../models/user.model"
 
 export class UserService {
@@ -23,7 +24,7 @@ export class UserService {
     static getUserByEmail(email: string) {
         const users = this.getUsers()
         const selectedUser = users.find(u => u.email === email)
-        
+
 
         if (!selectedUser) throw new Error('USER_NOT_FOUND')
 
@@ -54,9 +55,50 @@ export class UserService {
     }
 
     static getActiveUser() {
-        if(!this.hasAuth())
+        if (!this.hasAuth())
             throw new Error("NO_ACTIVE_USER")
 
         return this.getUserByEmail(localStorage.getItem(this.ACTIVE_USER_KEY)!)
+    }
+
+    static createReservation(order: OrderModel) {
+        const current = this.getActiveUser()
+        const all = this.getUsers()
+
+        for (let u of all) {
+            if (u.email === current.email) {
+                u.orders.push(order)
+            }
+        }
+
+        localStorage.setItem(this.USERS_KEY, JSON.stringify(all))
+    }
+
+    static updateOrder(orderId: string, status: 'na' | 'paid' | 'canceled' | 'liked' | 'disliked') {
+        const all = this.getUsers()
+
+        for (let u of all) {
+            if (u.email === localStorage.getItem(this.ACTIVE_USER_KEY)) {
+                for (let o of u.orders) {
+                    if (o.orderId === orderId) {
+                        o.status = status
+                    }
+                }
+            }
+        }
+
+        localStorage.setItem(this.USERS_KEY, JSON.stringify(all))
+    }
+
+    static deleteOrder(orderId: string) {
+        const all = this.getUsers()
+
+        for (let u of all) {
+            if (u.email === localStorage.getItem(this.ACTIVE_USER_KEY)) {
+                u.orders = u.orders.filter(o => o.orderId !== orderId)
+            }
+        }
+
+        localStorage.setItem(this.USERS_KEY, JSON.stringify(all))
     }
 }

@@ -6,6 +6,11 @@
 /out-tsc
 /bazel-out
 
+# Chatbot
+/chatbot/.rasa
+/chatbot/models
+/chatbot\actions\__pycache__
+
 # Node
 /node_modules
 npm-debug.log

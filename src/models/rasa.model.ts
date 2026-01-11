@@ -1,7 +1,7 @@
 export interface RasaModel {
     text: string
     attachment: {
-        type: "toy_list" 
+        type: "recommended_toys" | "toy_list" | "type_list"
         data: any
     }
 }

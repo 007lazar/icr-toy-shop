@@ -27,22 +27,37 @@
 		</div>
 
 
-		<!-- RIGHT: Auth -->
-		@if(!hasAuth()) {
-		<a routerLink="/login" class="btn login-btn px-4 py-2 rounded-pill fw-bold">
-			Login
-		</a>
-		} @else {
-		<div class="dropdown">
-			<button class="btn btn-outline-success dropdown-toggle rounded-pill px-3" data-bs-toggle="dropdown">
-				{{getUserName()}}
-			</button>
-			<ul class="dropdown-menu dropdown-menu-end">
-				<li><a class="dropdown-item" routerLink="/profile">My Profile</a></li>
-				<li><button class="dropdown-item" (click)="doLogout()">Logout</button></li>
-			</ul>
+		<!-- RIGHT: Auth + Cart -->
+		<div class="d-flex align-items-center gap-3">
+
+			<!-- Cart icon -->
+			<a routerLink="/basket" class="cart-btn position-relative">
+				<i class="fa-solid fa-basket-shopping"></i>
+
+				<!-- Optional badge -->
+				<span class="cart-badge" *ngIf="cartCount > 0">
+					{{ cartCount }}
+				</span>
+			</a>
+
+			@if(!hasAuth()) {
+			<a routerLink="/login" class="btn login-btn px-4 py-2 rounded-pill fw-bold">
+				Login
+			</a>
+			} @else {
+			<div class="dropdown">
+				<button class="btn btn-outline-success dropdown-toggle rounded-pill px-3" data-bs-toggle="dropdown">
+					{{getUserName()}}
+				</button>
+				<ul class="dropdown-menu dropdown-menu-end">
+					<li><a class="dropdown-item" routerLink="/profile">My Profile</a></li>
+					<li><button class="dropdown-item" (click)="doLogout()">Logout</button></li>
+				</ul>
+			</div>
+			}
+
 		</div>
-		}
+
 
 	</div>
 </nav>
@@ -69,10 +84,17 @@
 			</div>
 
 			<div class="chat-messages mb-3" style="max-height: 300px; overflow-y: auto;">
-				<div *ngFor="let msg of messages" class="mb-2">
-					<div *ngIf="msg.type === 'bot'" class="text-start text-dark" [innerHTML]="msg.text"></div>
-					<div *ngIf="msg.type === 'user'" class="text-end text-primary">{{ msg.text }}</div>
+				<div *ngFor="let msg of messages" class="mb-2 d-flex"
+					[ngClass]="{'justify-content-end': msg.type === 'user', 'justify-content-start': msg.type === 'bot'}">
+
+					<div *ngIf="msg.type === 'bot'" class="p-2 bg-light text-dark rounded-3 shadow-sm"
+						style="max-width: 80%;" [innerHTML]="msg.text || '&nbsp;'"></div>
+
+					<div *ngIf="msg.type === 'user'" class="p-2 bg-primary text-white rounded-3 shadow-sm"
+						style="max-width: 80%;">{{ msg.text }}</div>
+
 					<div *ngIf="msg.type === 'error'" class="text-danger">{{ msg.text }}</div>
+
 				</div>
 			</div>
 

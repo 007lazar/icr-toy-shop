@@ -1,3 +1,5 @@
+import { OrderModel } from "./order.model"
+
 export interface UserModel{
     fullName: string
     email: string
@@ -5,5 +7,5 @@ export interface UserModel{
     phone: string
     addres: string
     favoriteToys: []
-    orders: []
+    orders: OrderModel[]
 }

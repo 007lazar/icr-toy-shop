@@ -106,7 +106,7 @@
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.3px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   opacity: 0;
   transform: translateX(10px);
   transition: all 0.3s ease;
@@ -133,4 +133,88 @@
   100% {
     opacity: 0;
   }
+}
+
+.chat-window {
+  max-height: 600px;
+  overflow-y: hidden;
+}
+
+/* Messages scrolling */
+.chat-messages {
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+/* Responsive for tablets */
+@media only screen and (max-width: 800px) {
+  .chat-window {
+    width: 300px !important;
+    max-width: 90vw;
+    padding: 1rem;
+  }
+
+  .chat-messages {
+    max-height: 250px;
+  }
+
+  .chatbot-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+
+  .chatbot-label {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+  }
+}
+
+/* Responsive for mobile phones */
+@media only screen and (max-width: 600px) {
+  .chat-window {
+    width: 250px !important;
+    max-width: 90vw;
+    padding: 0.8rem;
+  }
+
+  .chat-messages {
+    max-height: 200px;
+  }
+
+  .chatbot-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
+  }
+
+  .chatbot-label {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+  }
+}
+
+.cart-btn {
+  font-size: 1.3rem;
+  color: #0d6efd;
+  text-decoration: none;
+  position: relative;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.cart-btn:hover {
+  transform: scale(1.1);
+  color: #084298;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: #dc3545;
+  color: white;
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 999px;
+  font-weight: bold;
 }

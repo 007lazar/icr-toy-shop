@@ -11,3 +11,18 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+
+- rule: 'Recommended toys'
+  steps:
+  - intent: recommended_toys
+  - action: action_recommended_toys
+
+- rule: 'Search toys'
+  steps:
+  - intent: search_toys
+  - action: action_search_toys
+
+- rule: 'Toy types'
+  steps:
+  - intent: toy_types
+  - action: action_toy_types

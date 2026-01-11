@@ -22,6 +22,7 @@ export class App {
   protected isChatVisible = false;
   protected userMessage = '';
   protected messages: MessageModel[] = [];
+  protected cartCount = 0;
 
   constructor(private router: Router, private utils: Utils) {
     // Initial bot greeting
@@ -72,7 +73,7 @@ export class App {
               html += `<li><strong>Name:</strong> ${toy.name}</li>`;
               html += `<li><strong>Type:</strong> ${toy.type.name}</li>`;
               html += `<li><strong>Age Group:</strong> ${toy.ageGroup.name}</li>`;
-              html += `<li><strong>Price:</strong> $${toy.price}</li>`;
+              html += `<li><strong>Price:</strong> ${toy.price} <span class="fs-6 fw-lighter text-muted">RSD</span></li>`;
               html += `<li><a href="/toy/permalink/${toy.permalink}">View Details</a></li>`;
               html += `</ul>`;
               html += `<hr>`;
@@ -81,7 +82,7 @@ export class App {
           }
 
           // Simple object lists (type, age group)
-          if (['type_list', 'age_group_list', 'target_group_list'].includes(botMsg.attachment.type)) {
+          if (['type_list', 'age_group_list'].includes(botMsg.attachment.type)) {
             let html = '<ul class="list-unstyled">';
             for (let obj of botMsg.attachment.data) {
               html += `<li>${obj.name}</li>`;
@@ -91,7 +92,6 @@ export class App {
           }
         }
 
-        // Normal bot text message
         if (botMsg.text) {
           this.messages.push({ type: 'bot', text: botMsg.text });
         }
