@@ -5,16 +5,16 @@
     margin-right: auto;
 }
 
-body {
-    padding-top: 100px;
-    background-image: url('https://img.freepik.com/premium-photo/room-with-teddy-bear-toy-car-it_1078797-10040.jpg?semt=ais_se_enriched&w=740&q=80');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: scroll;
-}
-
-body, html {
+html, body {
   height: 100%;
   margin: 0;
+  background-image: url('https://img.freepik.com/premium-photo/room-with-teddy-bear-toy-car-it_1078797-10040.jpg?semt=ais_se_enriched&w=740&q=80');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+body {
+  padding-top: 100px;
 }

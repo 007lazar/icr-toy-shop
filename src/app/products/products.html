@@ -1,1 +1,39 @@
-<p>products works!</p>
+<div class="row g-4">
+
+  @for (toy of products(); track toy.toyId) {
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="card h-100 shadow-sm border-0 toy-card">
+
+        <img [src]="toy.imageUrl" class="card-img-top" [alt]="toy.name" />
+
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ toy.name }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            {{ toy.type.name }} • {{ toy.ageGroup.name }}
+          </h6>
+          <p class="card-text flex-grow-1">{{ toy.description }}</p>
+          <div class="fw-bold fs-5 text-primary mb-2">
+            {{ toy.price }} <span class="fs-6 fw-lighter text-muted">RSD</span>
+          </div>
+        </div>
+
+        <div class="card-footer bg-transparent border-top-0 d-flex justify-content-between">
+          <a
+            class="btn btn-sm btn-outline-primary"
+            [routerLink]="`/toy/permalink/${toy.permalink}`"
+          >
+            <i class="fa-solid fa-eye"></i> Details
+          </a>
+
+          <button class="btn btn-sm btn-success" (click)="addToCart(toy)">
+            <i class="fa-solid fa-cart-shopping"></i> Add
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  }
+
+</div>

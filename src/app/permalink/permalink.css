@@ -1,0 +1,18 @@
+.card-header i {
+  margin-right: 8px;
+}
+
+.card-body h6 {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.card-footer button {
+  font-weight: 600;
+  padding: 0.5rem 1.2rem;
+}
+
+.img-fluid {
+  max-height: 400px;
+  object-fit: contain;
+}

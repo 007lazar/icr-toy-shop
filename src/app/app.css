@@ -45,7 +45,7 @@
 }
 
 .nav-modern .nav-link:hover {
-  color: #ffffff;
+  color: green;
 }
 
 .nav-modern .nav-link:hover::after,

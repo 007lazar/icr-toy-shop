@@ -1,0 +1,33 @@
+/* Toy card hover effect */
+.toy-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.toy-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+/* Card image styling */
+.toy-card .card-img-top {
+  height: 180px;
+  object-fit: contain;
+  background-color: #fff;
+  padding: 10px;
+}
+
+/* Optional: glass effect for card body */
+.toy-card .card-body {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+}
+
+/* Card footer buttons spacing */
+.toy-card .card-footer .btn {
+  flex: 1;
+  margin: 0 2px;
+  font-size: 0.85rem;
+}
+

@@ -5,6 +5,7 @@ import { Register } from './register/register';
 import { About } from './about/about';
 import { Products } from './products/products';
 import { Profile } from './profile/profile';
+import { Permalink } from './permalink/permalink';
 
 export const routes: Routes = [
     {path: '', title: "Home", component: Home},
@@ -13,5 +14,6 @@ export const routes: Routes = [
     {path: 'profile', title: "Profile", component: Profile},
     {path: 'about', title: "About", component: About},
     {path: 'products', title: "Products", component: Products},
+    {path: 'toy/permalink/:permalink', title: "Toy Permalink", component: Permalink},
     {path: '**', redirectTo: ''},
 ];
