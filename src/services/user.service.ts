@@ -90,6 +90,26 @@ export class UserService {
         localStorage.setItem(this.USERS_KEY, JSON.stringify(all))
     }
 
+    static updateProductQuantity(orderId: string, option: 'inc' | 'dec') {
+        const all = this.getUsers()
+
+        for (let u of all) {
+            if (u.email === localStorage.getItem(this.ACTIVE_USER_KEY)) {
+                for (let o of u.orders) {
+                    if (o.orderId === orderId) {
+                        if (option == 'inc') {
+                            o.quantity++
+                        } else if (option == 'dec' && o.quantity > 1) {
+                            o.quantity--
+                        }
+                    }
+                }
+            }
+        }
+
+        localStorage.setItem(this.USERS_KEY, JSON.stringify(all))
+    }
+
     static deleteOrder(orderId: string) {
         const all = this.getUsers()
 

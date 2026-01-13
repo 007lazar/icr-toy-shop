@@ -3,7 +3,8 @@ export interface OrderModel {
     toyId: number
     name: string
     price: number
-    description: string
+    ageGroup: string
+    type: string
     imageUrl: string
     quantity: number
     status: 'na' | 'paid' | 'canceled' | 'liked' | 'disliked'

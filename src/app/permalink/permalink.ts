@@ -36,12 +36,13 @@ export class Permalink {
       toyId: this.toy()!.toyId,
       name: this.toy()!.name,
       price: this.toy()!.price,
-      description: this.toy()!.description,
+      ageGroup: this.toy()!.ageGroup.name,
+      type: this.toy()!.type.name,
       imageUrl: this.toy()!.imageUrl,
       quantity: 1,
       status: 'na'
     })
 
-    this.router.navigateByUrl('/basket')
+    this.router.navigateByUrl('/cart')
   }
 }
