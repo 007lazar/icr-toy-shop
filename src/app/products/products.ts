@@ -14,6 +14,8 @@ export class Products {
   protected products = signal<ToyModel[]>([]);
   protected previousSearch = 'N/A';
   protected search = '';
+  protected apiBaseUrl = 'https://toy.pequla.com';
+  
 
   constructor() {
     this.loadProducts();

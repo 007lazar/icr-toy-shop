@@ -1,5 +1,4 @@
-<!-- Breadcrumb -->
-<nav aria-label="breadcrumb">
+<nav aria-label="breadcrumb" class="mb-5">
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
       <a routerLink="/">Home</a>
@@ -10,28 +9,17 @@
   </ol>
 </nav>
 
-<!-- Main content -->
 <div class="row g-4">
-  <!-- Toy image -->
   <div class="col-12 col-md-4">
-    <img 
-      [src]="toy()?.imageUrl" 
-      [alt]="toy()?.name" 
-      class="img-fluid rounded shadow-sm"
-    >
+    <img [src]="toy()?.imageUrl" [alt]="toy()?.name" class="img-fluid rounded shadow-sm">
   </div>
-
-  <!-- Toy info -->
   <div class="col-12 col-md-8">
     <div class="card shadow-sm">
-      <!-- Card header -->
       <div class="card-header bg-primary text-white">
         <h5>
           <i class="fa-solid fa-puzzle-piece"></i> {{ toy()?.name }}
         </h5>
       </div>
-
-      <!-- Card body -->
       <div class="card-body">
         <p>{{ toy()?.description }}</p>
 
@@ -62,7 +50,7 @@
         </div>
       </div>
 
-      <!-- Card footer -->
+
       <div class="card-footer text-center">
         <button class="btn btn-success" (click)="addToCart()">
           <i class="fa-solid fa-cart-shopping"></i> Add to Cart

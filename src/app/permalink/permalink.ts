@@ -14,6 +14,7 @@ import { v4 as uuidv4 } from 'uuid'
 })
 export class Permalink {
   protected toy = signal<ToyModel | null>(null)
+  protected apiBaseUrl = 'https://toy.pequla.com';
 
   constructor(private route: ActivatedRoute, private utils: Utils, private router: Router) {
     this.route.params.subscribe(p => {
