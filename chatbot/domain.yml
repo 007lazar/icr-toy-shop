@@ -11,20 +11,19 @@ intents:
   - recommended_toys
   - search_toys
   - toy_types
+  - toy_age_groups
   - order_toy
-
-entities:
-  - search_criteria
-  - order_criteria
 
 
 slots: 
   search_criteria:
-    type: text 
+    type: text
     influence_conversation: true
     mappings:
       - type: from_entity
         entity: search_criteria
+      - type: from_text
+        intent: search_toys
   
   order_criteria:
     type: text 
@@ -32,6 +31,10 @@ slots:
     mappings:
       - type: from_entity
         entity: order_criteria
+
+entities:
+  - search_criteria
+  - order_criteria
 
 responses:
   utter_greet:
@@ -57,7 +60,7 @@ actions:
   - action_recommended_toys
   - action_search_toys
   - action_toy_types
-  - action_order_movie
+  - action_age_groups
 
 session_config:
   session_expiration_time: 60

@@ -8,7 +8,7 @@
 			<img class="brand-logo"
 				src="https://static.vecteezy.com/system/resources/thumbnails/021/769/115/small/toys-logo-free-vector.jpg"
 				width="45" height="45" alt="Logo" />
-			<span class="brand-text">ToyShop</span>
+			<span class="brand-text fw-bold">ToyShop</span>
 		</a>
 
 		<!-- CENTER: Nav links -->
@@ -30,14 +30,8 @@
 		<!-- RIGHT: Auth + Cart -->
 		<div class="d-flex align-items-center gap-3">
 
-			<!-- Cart icon -->
 			<a routerLink="/cart" class="cart-btn position-relative">
 				<i class="fa-solid fa-basket-shopping"></i>
-
-				<!-- Optional badge -->
-				<span class="cart-badge" *ngIf="cartCount > 0">
-					{{ cartCount }}
-				</span>
 			</a>
 
 			@if(!hasAuth()) {
@@ -61,21 +55,22 @@
 
 	</div>
 </nav>
-<div class="container mt-5 pt-4">
+<div class="container mt-2 pt-4">
 	<router-outlet />
 
 	<!-- Chatbot -->
 	<div class="chatbot-container position-fixed bottom-0 end-0 p-3">
 
-		<button *ngIf="!isChatVisible" class="chatbot-btn" (click)="toggleChat()">
+		@if (!isChatVisible) {
+		<button class="chatbot-btn" (click)="toggleChat()">
 			<span class="pulse-ring"></span>
 			<i class="fa-solid fa-comment-dots"></i>
 		</button>
-		<div *ngIf="!isChatVisible" class="chatbot-label mt-1 text-center">Toy Assistant</div>
+		<div class="chatbot-label mt-1 text-center">Toy Assistant</div>
+		}
 
-		<div *ngIf="isChatVisible" class="chat-window bg-white shadow-lg rounded-4 p-3"
-			style="width: 350px; max-width: 90vw;">
-
+		@if (isChatVisible) {
+		<div class="chat-window bg-white shadow-lg rounded-4 p-3" style="width: 350px; max-width: 90vw;">
 			<div class="d-flex justify-content-between align-items-center mb-3">
 				<div class="fw-bold">Toy Assistant</div>
 				<button class="btn btn-sm btn-outline-secondary p-1" (click)="toggleChat()">
@@ -83,19 +78,58 @@
 				</button>
 			</div>
 
-			<div class="chat-messages mb-3" style="max-height: 300px; overflow-y: auto;">
-				<div *ngFor="let msg of messages" class="mb-2 d-flex"
+			@for (msg of messages; track $index) {}
+
+			<div class="chat-messages mb-3" #chatMessages style="max-height: 300px; overflow-y: auto;">
+				@for (msg of messages; track $index) {
+				<div class="mb-2 d-flex"
 					[ngClass]="{'justify-content-end': msg.type === 'user', 'justify-content-start': msg.type === 'bot'}">
 
-					<div *ngIf="msg.type === 'bot'" class="p-2 bg-light text-dark rounded-3 shadow-sm"
-						style="max-width: 80%;" [innerHTML]="msg.text || '&nbsp;'"></div>
+					@if (msg.type === 'bot') {
+					<div class="p-2 bg-light text-dark rounded-3 shadow-sm" style="max-width: 80%;">
+						@if (msg.text) {
+						<div [innerHTML]="msg.text"></div>
+						}
+						@if (msg.toys?.length) {
+						<div class="w-100 d-flex flex-column gap-2 mt-2">
+							@for (toy of msg.toys; track toy.toyId) {
+							<div class="card shadow-sm border-0 w-100 text-center">
+								<img [src]="'https://toy.pequla.com' + toy.imageUrl" [alt]="toy.name"
+									class="card-img-top img-fluid p-3" />
 
-					<div *ngIf="msg.type === 'user'" class="p-2 bg-primary text-white rounded-3 shadow-sm"
-						style="max-width: 80%;">{{ msg.text }}</div>
-
-					<div *ngIf="msg.type === 'error'" class="text-danger">{{ msg.text }}</div>
-
+								<div class="card-body py-2">
+									<div class="fw-semibold mb-1">
+										{{ toy.name }}
+									</div>
+									<div class="text-muted">
+										{{ toy.type.name }}
+									</div>
+									<div class="text-muted">
+										{{ toy.ageGroup.name }}
+									</div>
+									<div class="fw-bold text-primary mt-1">
+										{{ toy.price }} RSD
+									</div>
+									<a class="btn btn-outline-primary btn-sm w-100 mt-2"
+										[routerLink]="['/toy/permalink', toy.permalink]" (click)="toggleChat()">
+										View
+									</a>
+								</div>
+							</div>
+							}
+						</div>
+						}
+					</div>
+					}
+					@if (msg.type === 'user') {
+					<div class="p-2 bg-primary text-white rounded-3 shadow-sm" style="max-width: 80%;">{{ msg.text }}
+					</div>
+					}
+					@if (msg.type === 'error') {
+					<div class="text-danger">{{ msg.text }}</div>
+					}
 				</div>
+				}
 			</div>
 
 			<div class="input-group">
@@ -105,10 +139,9 @@
 					<i class="fa-solid fa-paper-plane"></i>
 				</button>
 			</div>
-
 		</div>
+		}
 	</div>
-
 
 	<div class="text-center text-white mt-3">
 		<p>&copy; All right's reserved {{year}} - Toy Shop</p>

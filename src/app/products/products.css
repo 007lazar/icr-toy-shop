@@ -28,3 +28,28 @@
   font-size: 0.85rem;
 }
 
+/* Filter bar */
+
+.filter-bar {
+  border-radius: 18px;
+  background: linear-gradient(135deg, #f8f9fa, #ffffff);
+}
+
+.filter-bar .form-control,
+.filter-bar .form-select {
+  border-radius: 12px;
+}
+
+.filter-bar .input-group-text {
+  border-radius: 12px 0 0 12px;
+}
+
+.filter-bar button {
+  border-radius: 12px;
+}
+
+.filter-bar:hover {
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.25s ease;
+}
+

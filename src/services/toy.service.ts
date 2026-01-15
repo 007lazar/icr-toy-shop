@@ -13,7 +13,7 @@ export class ToyService {
 
   private static readonly BASE_URL = 'https://toy.pequla.com';
 
-  static async getToys(search: string = '', type: number = 0, ageGroup: number = 0) {
+  static async getToys() {
     const response = await client.request<ToyModel[]>({
       url: '/toy',
       method: 'GET',

@@ -26,3 +26,8 @@ rules:
   steps:
   - intent: toy_types
   - action: action_toy_types
+
+- rule: 'Age groups'
+  steps:
+  - intent: toy_age_groups
+  - action: action_age_groups

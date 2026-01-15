@@ -1,41 +1,71 @@
 version: "3.1"
 
 nlu:
+  # - intent: search_toys
+  #   examples: |
+  #     - search toy for [Monopol Junior](search_criteria)
+  #     - search toys about [Lego](search_criteria)
+  #     - search for a toy like [Hot Wheels](search_criteria)
+  #     - i want toys like [Play-Doh](search_criteria)
+  #     - find toys similar to [Set za crtanje](search_criteria)
+  #     - find toys like [Transformers](search_criteria)
+  #     - can you find toys like [Puzzle Cube](search_criteria)
+  #     - show me toys similar to [Action Figure](search_criteria)
+  #     - recommend toys like [Stuffed Animal](search_criteria)
+  #     - give me toys like [Remote Car](search_criteria)
+  #     - i want to buy something like [Doll House](search_criteria)
+  #     - look up toys about [Train Set](search_criteria)
+  #     - toys similar to [Plišana panda](search_criteria)
+  #     - can you search for toys like [Vatrogasni kamion](search_criteria)
+  #     - please search toys for [Educational Toy](search_criteria)
+  #     - show results for [Toy Car](search_criteria)
+  #     - what toys are like [Robot Toy](search_criteria)
+  #     - list toys like [Plushie](search_criteria)
+  #     - get me toys similar to [Drone](search_criteria)
+  #     - pull toys related to [Animal Figures](search_criteria)
+  #     - toys related to [Building Blocks](search_criteria)
+  #     - find something similar to [Water Gun](search_criteria)
+  #     - any toys like [Model Train](search_criteria)
+  #     - search toys by [Action Figure](search_criteria)
+  #     - toys inspired by [LEGO](search_criteria)
+
+  # - regex: search_criteria
+  #   examples: |
+  #     - (?<=toys for ).*
+  #     - (?<=toys by ).*
+  #     - (?<=search for ).*
+  #     - (?<=toys like ).*
+  #     - (?<=toys inspired ).*
+
   - intent: search_toys
     examples: |
-      - search toy for [Lego](search_criteria)
-      - search toys about [Barbie](search_criteria)
-      - search for a toy like [Hot Wheels](search_criteria)
-      - i want toys like [Play-Doh](search_criteria)
-      - find toys similar to [Nerf](search_criteria)
-      - find toys like [Transformers](search_criteria)
-      - can you find toys like [Puzzle Cube](search_criteria)
-      - show me toys similar to [Action Figure](search_criteria)
-      - recommend toys like [Stuffed Animal](search_criteria)
-      - give me toys like [Remote Car](search_criteria)
-      - i want to buy something like [Doll House](search_criteria)
-      - look up toys about [Train Set](search_criteria)
-      - toys similar to [Board Game](search_criteria)
-      - can you search for toys like [Magic Kit](search_criteria)
-      - please search toys for [Educational Toy](search_criteria)
-      - show results for [Toy Car](search_criteria)
-      - what toys are like [Robot Toy](search_criteria)
-      - list toys like [Plushie](search_criteria)
-      - get me toys similar to [Drone](search_criteria)
-      - pull toys related to [Animal Figures](search_criteria)
-      - toys related to [Building Blocks](search_criteria)
-      - find something similar to [Water Gun](search_criteria)
-      - any toys like [Model Train](search_criteria)
-      - search toys by [Action Figure](search_criteria)
-      - toys inspired by [LEGO Star Wars](search_criteria)
+      - search toy for [lego](search_criteria)
+      - search toys about [barbie](search_criteria)
+      - search for a toy like [hot wheels](search_criteria)
+      - i want toys like [play-doh](search_criteria)
+      - find toys similar to [superheroj figura](search_criteria)
+      - find toys like [transformers](search_criteria)
+      - find toys like [muzički bubanj](search_criteria)
+      - find toys like [kreativni set za modelovanje](search_criteria)
+      - find a toy named [vatrogasni kamion](search_criteria)
+      - find a toy named [lego classic set](search_criteria)
+      - find a toy named [vatrogasni kamion](search_criteria)
+      - find a toy named [plišana panda](search_criteria)
+      - find a toy named [plisana panda](search_criteria)
+      - find a toy like [plisana](search_criteria)
+      - find toys like [plišana igračka](search_criteria)
+
 
   - regex: search_criteria
     examples: |
       - (?<=toys for ).*
-      - (?<=toys by ).*
+      - (?<=toys about ).*
       - (?<=search for ).*
       - (?<=toys like ).*
-      - (?<=toys inspired ).*
+      - (?<=find a toy like ).*
+      - (?<=find a toy named ).*
+      - (?<=find toys similar to ).*
+
 
   - intent: order_toy
     examples: |
@@ -71,6 +101,31 @@ nlu:
       - give me the toy type options
       - what type categories exist
       - what types of toys do you support
+
+  - intent: toy_age_groups
+    examples: |
+      - list all age groups
+      - list all toy age groups
+      - what age groups do you have
+      - show me age groups for toys
+      - which age groups exist
+      - give me all age groups
+      - can you list age groups
+      - display all age groups
+      - tell me the available age groups
+      - what kinds of age groups are there
+      - what age groups can I choose from
+      - list available age groups
+      - I want to see all age groups
+      - tell me the list of age groups
+      - show me the age group list
+      - give me the age group options
+      - what age categories exist
+      - what age ranges do you support
+      - toys for which ages
+      - age groups for toys
+      - which ages are supported
+      - what ages are available
 
   - intent: recommended_toys
     examples: |

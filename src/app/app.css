@@ -12,7 +12,6 @@
   color: #002b33;
 }
 
-/* Brand */
 .brand-logo {
   border-radius: 50%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -24,10 +23,14 @@
   box-shadow: 0 0 12px rgba(79, 172, 254, 0.8);
 }
 
+.brand-text {
+  color: #2dff08;
+}
+
 .nav-modern .nav-link {
   position: relative;
   font-weight: 600;
-  color: #e0f7ff;
+  color: #029155;
   padding: 0.25rem 0;
   transition: color 0.25s ease;
 }
@@ -45,7 +48,7 @@
 }
 
 .nav-modern .nav-link:hover {
-  color: green;
+  color: #2f5c11;
 }
 
 .nav-modern .nav-link:hover::after,
@@ -60,7 +63,6 @@
   gap: 10px;
 }
 
-/* Button base */
 .chatbot-btn {
   width: 60px;
   height: 60px;
@@ -81,7 +83,6 @@
   box-shadow: 0 12px 32px rgba(79, 172, 254, 0.9);
 }
 
-/* Pulse animation ring */
 .pulse-ring {
   position: absolute;
   width: 100%;
@@ -97,7 +98,6 @@
   z-index: 1;
 }
 
-/* Label */
 .chatbot-label {
   background: linear-gradient(135deg, #ffecd2, #fcb69f);
   color: #5a2d0c;
@@ -118,7 +118,7 @@
   transform: translateX(0);
 }
 
-/* Animation */
+
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -140,13 +140,36 @@
   overflow-y: hidden;
 }
 
-/* Messages scrolling */
 .chat-messages {
   overflow-y: auto;
   max-height: 300px;
 }
 
-/* Responsive for tablets */
+.cart-btn {
+  font-size: 1.3rem;
+  color: #2dff08;
+  text-decoration: none;
+  position: relative;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.cart-btn:hover {
+  transform: scale(1.1);
+  color: #75e262;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: #dc3545;
+  color: white;
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 999px;
+  font-weight: bold;
+}
+
 @media only screen and (max-width: 800px) {
   .chat-window {
     width: 300px !important;
@@ -170,7 +193,6 @@
   }
 }
 
-/* Responsive for mobile phones */
 @media only screen and (max-width: 600px) {
   .chat-window {
     width: 250px !important;
@@ -192,29 +214,4 @@
     font-size: 0.7rem;
     padding: 4px 8px;
   }
-}
-
-.cart-btn {
-  font-size: 1.3rem;
-  color: #0d6efd;
-  text-decoration: none;
-  position: relative;
-  transition: transform 0.15s ease, color 0.15s ease;
-}
-
-.cart-btn:hover {
-  transform: scale(1.1);
-  color: #084298;
-}
-
-.cart-badge {
-  position: absolute;
-  top: -6px;
-  right: -10px;
-  background: #dc3545;
-  color: white;
-  font-size: 0.65rem;
-  padding: 2px 6px;
-  border-radius: 999px;
-  font-weight: bold;
 }

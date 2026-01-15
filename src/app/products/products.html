@@ -1,6 +1,71 @@
+<div class="container mb-4">
+  <div class="card shadow-sm border-0 filter-bar">
+    <div class="card-body">
+
+      <div class="row g-3 align-items-center">
+
+        <!-- Search -->
+        <div class="col-12 col-md-6 col-lg-5">
+          <div class="input-group">
+            <span class="input-group-text bg-white border-end-0">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
+            <input
+              type="text"
+              name="search"
+              class="form-control border-start-0"
+              placeholder="Search toys..."
+              [ngModel]="search()" 
+              (ngModelChange)="search.set($event)"
+            />
+          </div>
+        </div>
+
+        <!-- Type filter -->
+        <div class="col-6 col-md-3 col-lg-3">
+          <select class="form-select" [ngModel]="type()" (ngModelChange)="type.set($event)" name="type">
+            <option selected value="">All Types</option>
+            <option value="slagalica">Slagalica</option>
+            <option value="slikovnica">Slikovnica</option>
+            <option value="figura">Figura</option>
+            <option value="kreativni set">Kreativni set</option>
+            <option value="vozilo">Vozilo</option>
+            <option value="plišana igračka">Plišana igračka</option>
+            <option value="društvena igra">Društvena igra</option>
+            <option value="konstruktorski set">Konstruktorski set</option>
+            <option value="muzička igračka">Muzička igračka</option>
+            <option value="edukativna igračka">Edukativna igračka</option>
+          </select>
+        </div>
+
+        <!-- Age group filter -->
+        <div class="col-6 col-md-3 col-lg-3">
+          <select class="form-select" [ngModel]="ageGroup()" (ngModelChange)="ageGroup.set($event)" name="ageGroup">
+            <option selected value="">All Ages</option>
+            <option value="0-2">0-2</option>
+            <option value="3-5">3-5</option>
+            <option value="6-9">6-9</option>
+            <option value="10+">10+</option>
+          </select>
+        </div>
+
+        <!-- Clear -->
+        <div class="col-12 col-lg-1 d-grid">
+          <button class="btn btn-outline-secondary" (click)="clearFilters()">
+            <i class="fa-solid fa-rotate-left"></i>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
 <div class="row g-4">
 
-  @for (toy of products(); track toy.toyId) {
+  @for (toy of filteredProducts(); track toy.toyId) {
 
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="card h-100 shadow-sm border-0 toy-card">
@@ -25,10 +90,7 @@
           >
             <i class="fa-solid fa-eye"></i> Details
           </a>
-
-          <button class="btn btn-sm btn-success" (click)="addToCart(toy)">
-            <i class="fa-solid fa-cart-shopping"></i> Add
-          </button>
+          
         </div>
 
       </div>

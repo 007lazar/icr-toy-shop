@@ -2,7 +2,19 @@ from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import SlotSet
 import requests
+import unicodedata
+
+
+
+def normalize_text(text: str) -> str:
+    if not text:
+        return ""
+    text = text.strip().lower()
+    nfkd_form = unicodedata.normalize('NFKD', text)
+    only_ascii = "".join([c for c in nfkd_form if not unicodedata.combining(c)])
+    return only_ascii
 
 
 class ActionHelloWorld(Action):
@@ -54,17 +66,17 @@ class ActionSearchToys(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-            
-        criteria = tracker.get_slot("search_criteria")
+
+        raw_criteria = tracker.get_slot("search_criteria") or ""
+        criteria = normalize_text(raw_criteria)
 
         if not criteria:
-            dispatcher.utter_message("I didnt catch what toy to search for. Try again")
+            dispatcher.utter_message("I didn't catch the toy name. Please try again!")
             return []
 
         url = 'https://toy.pequla.com/api/toy'
         res = requests.get(url)
         toys = res.json()
-         
 
         matching_toys = [
             {
@@ -78,21 +90,23 @@ class ActionSearchToys(Action):
                 "type": toy["type"]
             }
             for toy in toys
-            if criteria.lower() in toy["name"].lower()
+            if criteria in normalize_text(toy["name"]) 
+            or criteria in normalize_text(toy["description"])
         ]
 
         if matching_toys:
             dispatcher.utter_message(
-                text=f"Here are the search results for '{criteria}':",
+                text=f"Here are the search results for '{raw_criteria}':",
                 attachment={
                     "type": "toy_list",
                     "data": matching_toys
                 }
             )
         else:
-            dispatcher.utter_message(text=f"Sorry, no toys found matching '{criteria}'.")
+            dispatcher.utter_message(text=f"Sorry, no toys found matching '{raw_criteria}'.")
 
-        return []
+        return [SlotSet("search_criteria", None)]
+
     
 
 class ActionToyTypes(Action):
@@ -119,23 +133,23 @@ class ActionToyTypes(Action):
         return []
 
 
-class ActionOrderMovie(Action):
+class ActionAgeGroups(Action):
 
     def name(self) -> Text:
-        return "action_toy_types"
+        return "action_age_groups"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        url = 'https://toy.pequla.com/api/type'
+        url = 'https://toy.pequla.com/api/age-group'
         res = requests.get(url)
 
 
         dispatcher.utter_message(
-            text= 'Here are the available types:',
+            text= 'Here are the available age groups:',
             attachment={
-                "type": "type_list",
+                "type": "age_group_list",
                 "data": res.json()
             }
         )

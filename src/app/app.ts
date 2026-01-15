@@ -1,13 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, signal, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { Utils } from './utils';
 import { MessageModel } from '../models/message.model';
 import { FormsModule } from "@angular/forms";
-import { ToyModel } from '../models/toy.model';
 import { RasaService } from '../services/rasa.service';
 import { CommonModule } from '@angular/common';
-
 
 @Component({
   selector: 'app-root',
@@ -15,14 +13,15 @@ import { CommonModule } from '@angular/common';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App implements AfterViewChecked {
+  @ViewChild('chatMessages') chatMessages!: ElementRef;
+  
   protected year = new Date().getFullYear();
   protected waitingForResponse = false;
   protected botThinkingPlaceholder = 'Thinking...';
   protected isChatVisible = false;
   protected userMessage = '';
   protected messages: MessageModel[] = [];
-  protected cartCount = 0;
 
   constructor(private router: Router, private utils: Utils) {
     // Initial bot greeting
@@ -30,6 +29,16 @@ export class App {
       type: 'bot',
       text: 'Hi! I am your Toy Shop Assistant. How can I help you today?'
     });
+  }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom() {
+    try {
+      this.chatMessages.nativeElement.scrollTop = this.chatMessages.nativeElement.scrollHeight;
+    } catch (err) {}
   }
 
   toggleChat() {
@@ -66,26 +75,15 @@ export class App {
       for (let botMsg of rsp.data) {
         if (botMsg.attachment) {
           // Toy list attachment
-          if (botMsg.attachment.type === 'toy_list' && Array.isArray(botMsg.attachment.data)) {
-            let html = '';
-            for (let toy of botMsg.attachment.data as ToyModel[]) {
-              html += `<ul class="list-unstyled mb-2">`;
-              html += `<li><strong>Name:</strong> ${toy.name}</li>`;
-              html += `<li><strong>Type:</strong> ${toy.type.name}</li>`;
-              html += `<li><strong>Age Group:</strong> ${toy.ageGroup.name}</li>`;
-              html += `<li><strong>Price:</strong> ${toy.price} <span class="fs-6 fw-lighter text-muted">RSD</span></li>`;
-              html += `<li><a href="/toy/permalink/${toy.permalink}">View Details</a></li>`;
-              html += `</ul>`;
-              html += `<hr>`;
-            }
-            this.messages.push({ type: 'bot', text: html });
+          if (botMsg.attachment?.type === 'toy_list' && Array.isArray(botMsg.attachment.data)) {
+            this.messages.push({ type: 'bot', toys: botMsg.attachment.data});
           }
 
           // Simple object lists (type, age group)
           if (['type_list', 'age_group_list'].includes(botMsg.attachment.type)) {
-            let html = '<ul class="list-unstyled">';
+            let html = '<ul class="list-group list-group-numbered">';
             for (let obj of botMsg.attachment.data) {
-              html += `<li>${obj.name}</li>`;
+              html += `<li class="list-group-item">${obj.name}</li>`;
             }
             html += '</ul>';
             this.messages.push({ type: 'bot', text: html });
