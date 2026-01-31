@@ -3,7 +3,7 @@
         <h5>Shopping Cart <i class="fa-solid fa-cart-shopping"></i></h5>
     </div>
     @if (activeUser()!.orders.length > 0) {
-    <div class="row g-3 mx-1 my-1">
+    <div class="row g-3 mx-1 my-1 pb-2">
         @for (order of activeUser()?.orders; track order.orderId) {
         <div class="col-md-6 col-lg-4">
 

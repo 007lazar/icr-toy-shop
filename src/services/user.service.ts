@@ -15,7 +15,17 @@ export class UserService {
                 addres: "Vojvode Stepe 331",
                 favoriteToys: [],
                 orders: []
-            }]))
+            },
+            {
+                fullName: 'Rados Milenkovic',
+                email: "rados02@gmail.com",
+                password: "rados123",
+                phone: "061234567",
+                addres: "Unjanska za Vranje",
+                favoriteToys: [],
+                orders: []
+            }
+        ]))
         }
 
         return JSON.parse(localStorage.getItem(this.USERS_KEY)!)

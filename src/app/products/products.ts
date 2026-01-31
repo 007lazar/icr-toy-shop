@@ -1,12 +1,14 @@
 import { Component, computed, signal } from '@angular/core';
 import { ToyModel } from '../../models/toy.model';
 import { ToyService } from '../../services/toy.service';
-import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { FormsModule, NgModel } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { UserService } from '../../services/user.service';
+import { Utils } from '../utils';
 
 @Component({
   selector: 'app-products',
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink,],
   templateUrl: './products.html',
   styleUrl: './products.css',
 })
@@ -15,6 +17,9 @@ export class Products {
   protected search = signal('');
   protected type = signal('');
   protected ageGroup = signal('');
+  protected ratingByToyId: Record<number, number> = {}  
+  protected commentByToyId: Record<number, string> = {}
+  protected hasUser = true
   protected filteredProducts = computed(() => {
     let items = this.products();
 
@@ -45,7 +50,7 @@ export class Products {
   });
 
 
-  constructor() {
+  constructor(private utils: Utils) {
     this.loadProducts();
   }
 
@@ -58,6 +63,10 @@ export class Products {
     this.search.set('');
     this.type.set('');
     this.ageGroup.set('');
+  }
+
+  protected getAverageRating(toy: ToyModel){
+    return ToyService.getAverageRating(toy.toyId)
   }
 
 }

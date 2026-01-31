@@ -1,55 +1,175 @@
-
-.toy-card {
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-.toy-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
-}
-
-.toy-card .card-img-top {
-  height: 180px;
-  object-fit: contain;
-  background-color: #fff;
-  padding: 10px;
-}
-
-.toy-card .card-body {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(6px);
-}
-
-.toy-card .card-footer .btn {
-  flex: 1;
-  margin: 0 2px;
-  font-size: 0.85rem;
-}
-
-/* Filter bar */
-
+/*  Filter bar  */
 .filter-bar {
-  border-radius: 18px;
-  background: linear-gradient(135deg, #f8f9fa, #ffffff);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.filter-bar:hover {
+  box-shadow: 0 12px 40px rgba(37, 99, 235, 0.15);
+  border-color: rgba(37, 99, 235, 0.2);
+}
+
+.filter-bar .card-body {
+  padding: 1rem 1.25rem;
 }
 
 .filter-bar .form-control,
 .filter-bar .form-select {
   border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filter-bar .form-control:focus,
+.filter-bar .form-select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  outline: none;
 }
 
 .filter-bar .input-group-text {
   border-radius: 12px 0 0 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: none;
+  background: rgba(255, 255, 255, 0.95);
+  color: #029155;
 }
 
-.filter-bar button {
+.filter-bar .input-group:focus-within .input-group-text {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.filter-bar .btn {
   border-radius: 12px;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.filter-bar:hover {
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
-  transition: box-shadow 0.25s ease;
+.filter-bar .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+
+.toy-card {
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.toy-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(37, 99, 235, 0.2);
+  border-color: rgba(37, 99, 235, 0.3);
+}
+
+.toy-card .card-img-top {
+  height: 200px;
+  object-fit: contain;
+  background: linear-gradient(180deg, rgba(248, 249, 250, 0.98) 0%, rgba(255, 255, 255, 1) 100%);
+  padding: 1.25rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.toy-card .card-body {
+  padding: 1.25rem 1.35rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.toy-card .card-title {
+  font-size: 1.08rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #1a1d21;
+  margin-bottom: 0.35rem;
+}
+
+.toy-card .card-subtitle {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #029155;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.6rem;
+}
+
+.toy-card .card-text {
+  font-size: 0.9rem;
+  color: #5c636a;
+  line-height: 1.5;
+  flex-grow: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 0.9rem;
+}
+
+
+.toy-card .card-body > .d-flex {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.toy-card .product-price {
+  font-size: 1.2rem;
+  color: #003b44;
+  font-weight: 700;
+}
+
+.toy-card .product-price-unit {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #6c757d;
+}
+
+.toy-card .text-warning {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #b8860b !important;
+  background: rgba(255, 193, 7, 0.12);
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+}
+
+/* Details button*/
+.toy-card .card-footer {
+  padding: 0.85rem 1.35rem;
+  background: rgba(248, 249, 250, 0.8);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.toy-card .card-footer .btn {
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+
+.toy-card .card-footer .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+  color: #fff;
+}

@@ -20,6 +20,15 @@ export class Utils {
             confirmButtonText: 'Cool'
         })
     }
+    
+    public showRating(text: string) {
+        Swal.fire({
+            title: 'Awesome!',
+            text: text,
+            icon: 'success',
+            confirmButtonText: 'Cool'
+        })
+    }
 
     public showDialog(title: string, callback: Function, cancel: string = "No", confirm: string = "Yes",) {
         Swal.fire({
@@ -29,10 +38,11 @@ export class Utils {
             cancelButtonText: cancel,
             customClass: this.bootstrapClasses
         }).then((result) => {
-            if (result.isConfirmed) {
+            if (result.isConfirmed && title === "Are you sure you want to log out?") {
                 Swal.fire('Logout sucess!', '', 'success')
-                callback()
+                
             }
+            callback()
         })
     }
 }

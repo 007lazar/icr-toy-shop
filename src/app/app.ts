@@ -1,4 +1,4 @@
-import { Component, signal, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { Utils } from './utils';
@@ -24,6 +24,8 @@ export class App implements AfterViewChecked {
   protected messages: MessageModel[] = [];
 
   constructor(private router: Router, private utils: Utils) {
+    UserService.getUsers()
+
     // Initial bot greeting
     this.messages.push({
       type: 'bot',
