@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { Utils } from './utils';
@@ -13,15 +13,16 @@ import { CommonModule } from '@angular/common';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App implements AfterViewChecked {
-  @ViewChild('chatMessages') chatMessages!: ElementRef;
-  
+export class App {
+  @ViewChild('chatMessages') chatMessages?: ElementRef<HTMLElement>;
+
   protected year = new Date().getFullYear();
   protected waitingForResponse = false;
   protected botThinkingPlaceholder = 'Thinking...';
   protected isChatVisible = false;
   protected userMessage = '';
   protected messages: MessageModel[] = [];
+  protected showScrollButton = false;
 
   constructor(private router: Router, private utils: Utils) {
     UserService.getUsers()
@@ -33,19 +34,42 @@ export class App implements AfterViewChecked {
     });
   }
 
-  ngAfterViewChecked() {
-    this.scrollToBottom();
+  private getChatEl(): HTMLElement | null {
+    return this.chatMessages?.nativeElement ?? null;
+  }
+
+  private isAtBottom(): boolean {
+    const el = this.getChatEl();
+    if (!el) return true;
+
+    // -1 - one pixel for rounding
+    return el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
+  }
+
+  private updateScrollButton() {
+    this.showScrollButton = !this.isAtBottom();
+  }
+
+  onChatScroll() {
+    this.updateScrollButton();
   }
 
   scrollToBottom() {
-    try {
-      this.chatMessages.nativeElement.scrollTop = this.chatMessages.nativeElement.scrollHeight;
-    } catch (err) {}
+    const el = this.getChatEl();
+    if (!el) return;
+
+    el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' })
+    this.showScrollButton = false;
   }
 
   toggleChat() {
     this.isChatVisible = !this.isChatVisible;
+
+    if (this.isChatVisible) {
+      setTimeout(() => this.updateScrollButton(), 0);
+    }
   }
+
 
   async sendUserMessage() {
     if (this.waitingForResponse) return;
@@ -56,6 +80,7 @@ export class App implements AfterViewChecked {
     this.userMessage = '';
     this.messages.push({ type: 'user', text: trimmedMessage });
     this.messages.push({ type: 'bot', text: this.botThinkingPlaceholder });
+    setTimeout(() => this.updateScrollButton(), 0);
 
     this.waitingForResponse = true;
 
@@ -78,7 +103,7 @@ export class App implements AfterViewChecked {
         if (botMsg.attachment) {
           // Toy list attachment
           if (botMsg.attachment?.type === 'toy_list' && Array.isArray(botMsg.attachment.data)) {
-            this.messages.push({ type: 'bot', toys: botMsg.attachment.data});
+            this.messages.push({ type: 'bot', toys: botMsg.attachment.data });
           }
 
           // Simple object lists (type, age group)
@@ -96,6 +121,8 @@ export class App implements AfterViewChecked {
           this.messages.push({ type: 'bot', text: botMsg.text });
         }
       }
+
+      setTimeout(() => this.updateScrollButton(), 0);
 
     } catch (err) {
       this.removeBotPlaceholder();

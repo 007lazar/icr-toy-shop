@@ -136,8 +136,36 @@
 }
 
 .chat-window {
+  position: relative;
   max-height: 600px;
   overflow-y: hidden;
+}
+
+.scroll-btn {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 72px;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, rgba(0, 242, 254, 0.55), rgba(79, 172, 254, 0.55));
+  color: rgba(0, 59, 68, 0.85);
+  box-shadow: 0 6px 18px rgba(79, 172, 254, 0.25);
+  display: grid;
+  place-items: center;
+  opacity: 0.75;
+  backdrop-filter: blur(2px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  z-index: 2;
+}
+
+.scroll-btn:hover {
+  opacity: 0.95;
+  box-shadow: 0 10px 26px rgba(79, 172, 254, 0.45);
+  transform: translateX(-50%) scale(1.06);
 }
 
 .chat-messages {
@@ -175,6 +203,12 @@
     width: 300px !important;
     max-width: 90vw;
     padding: 1rem;
+  }
+
+  .scroll-btn {
+    bottom: 66px;
+    width: 40px;
+    height: 40px;
   }
 
   .chat-messages {

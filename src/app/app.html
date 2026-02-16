@@ -80,7 +80,8 @@
 
 			@for (msg of messages; track $index) {}
 
-			<div class="chat-messages mb-3" #chatMessages style="max-height: 300px; overflow-y: auto;">
+			<div class="chat-messages mb-3" #chatMessages (scroll)="onChatScroll()"
+				style="max-height: 300px; overflow-y: auto;">
 				@for (msg of messages; track $index) {
 				<div class="mb-2 d-flex"
 					[ngClass]="{'justify-content-end': msg.type === 'user', 'justify-content-start': msg.type === 'bot'}">
@@ -132,6 +133,12 @@
 				}
 			</div>
 
+			@if (showScrollButton) {
+			<button class="scroll-btn" (click)="scrollToBottom()">
+				<i class="fa-solid fa-arrow-down"></i>
+			</button>
+			}
+
 			<div class="input-group">
 				<input type="text" class="form-control rounded-pill" [(ngModel)]="userMessage"
 					(keydown.enter)="sendUserMessage()" placeholder="Type your message..." />
@@ -141,6 +148,7 @@
 			</div>
 		</div>
 		}
+
 	</div>
 
 	<div class="text-center text-white mt-3">
