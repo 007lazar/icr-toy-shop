@@ -1,59 +1,35 @@
-# IcrToyShop
+ICR Toy Shop Project Description
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.8.
+This project was developed as part of a graduate course in
+Human-Computer Interaction (ICR) and demonstrates the design and
+implementation of a modern web application using professional software
+engineering practices.
 
-## Development server
+The application simulates an online toy shop where users can browse
+products, interact with interface components, and use shopping cart
+functionality within a responsive user interface.
 
-To start a local development server, run:
+The system is built using Angular and TypeScript, following
+component-based architecture to ensure modularity, maintainability, and
+scalability. The project emphasizes usability, responsiveness, and
+clarity of interaction, aligning with principles taught in
+Human-Computer Interaction coursework.
 
-```bash
-ng serve
-```
+Unit testing is implemented using Jest to ensure reliability and
+correctness of application behavior. Automated testing allows faster
+feedback during development and improves long-term code maintainability.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Continuous Integration is configured so that tests and quality checks
+are automatically executed when changes are pushed to the repository.
+This reflects professional development workflows commonly used in
+software engineering teams.
 
-## Code scaffolding
+The project demonstrates skills in front-end development, testing
+practices, UI composition, and structured project organization. It also
+highlights the ability to transform academic requirements into a
+functional and user-oriented application.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Overall, this project represents practical experience in building,
+testing, and maintaining a web application while applying user
+interaction and usability principles in a professional engineering
+context.
