@@ -1,3 +1,5 @@
+[![CI](https://github.com/007lazar/icr-toy-shop/actions/workflows/ci.yml/badge.svg)](https://github.com/007lazar/icr-toy-shop/actions/workflows/ci.yml)
+
 ICR Toy Shop Project Description
 
 This project was developed as part of a graduate course in
